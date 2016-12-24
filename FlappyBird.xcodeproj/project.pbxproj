@@ -12,6 +12,8 @@
 		5D6CF9ED1E0564350000A092 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D6CF9EB1E0564350000A092 /* Main.storyboard */; };
 		5D6CF9EF1E0564350000A092 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D6CF9EE1E0564350000A092 /* Assets.xcassets */; };
 		5D6CF9F21E0564350000A092 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D6CF9F01E0564350000A092 /* LaunchScreen.storyboard */; };
+		5D6CF9FB1E05649E0000A092 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D6CF9FA1E05649E0000A092 /* SpriteKit.framework */; };
+		5D6CF9FD1E0569FC0000A092 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6CF9FC1E0569FC0000A092 /* GameScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		5D6CF9EE1E0564350000A092 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5D6CF9F11E0564350000A092 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5D6CF9F31E0564350000A092 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5D6CF9FA1E05649E0000A092 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
+		5D6CF9FC1E0569FC0000A092 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D6CF9FB1E05649E0000A092 /* SpriteKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +45,7 @@
 			children = (
 				5D6CF9E61E0564340000A092 /* FlappyBird */,
 				5D6CF9E51E0564340000A092 /* Products */,
+				5D6CF9F91E05649E0000A092 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,10 +64,19 @@
 				5D6CF9E91E0564340000A092 /* ViewController.swift */,
 				5D6CF9EB1E0564350000A092 /* Main.storyboard */,
 				5D6CF9EE1E0564350000A092 /* Assets.xcassets */,
+				5D6CF9FC1E0569FC0000A092 /* GameScene.swift */,
 				5D6CF9F01E0564350000A092 /* LaunchScreen.storyboard */,
 				5D6CF9F31E0564350000A092 /* Info.plist */,
 			);
 			path = FlappyBird;
+			sourceTree = "<group>";
+		};
+		5D6CF9F91E05649E0000A092 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5D6CF9FA1E05649E0000A092 /* SpriteKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -96,6 +111,7 @@
 				TargetAttributes = {
 					5D6CF9E31E0564340000A092 = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = JPU48P9BR3;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -136,6 +152,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D6CF9FD1E0569FC0000A092 /* GameScene.swift in Sources */,
 				5D6CF9EA1E0564340000A092 /* ViewController.swift in Sources */,
 				5D6CF9E81E0564340000A092 /* AppDelegate.swift in Sources */,
 			);
@@ -258,7 +275,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = JPU48P9BR3;
 				INFOPLIST_FILE = FlappyBird/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.techacademy.kenren.FlappyBird;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -270,7 +289,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = JPU48P9BR3;
 				INFOPLIST_FILE = FlappyBird/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.techacademy.kenren.FlappyBird;
 				PRODUCT_NAME = "$(TARGET_NAME)";
