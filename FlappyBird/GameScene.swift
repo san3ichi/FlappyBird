@@ -7,6 +7,7 @@
 //
 
 import SpriteKit
+import AudioToolbox
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
@@ -24,8 +25,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // スコア
     var score = 0
+    var itemScore = 0
     var scoreLabelNode:SKLabelNode!
     var bestScoreLabelNode:SKLabelNode!
+    var itemScoreLabelNode:SKLabelNode!
     let userDefaults:UserDefaults = UserDefaults.standard
     
     
@@ -320,41 +323,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             // 衝突の時に動かないように設定する
             sprite.physicsBody?.isDynamic = false
-            
-            
-   /*         // 上側の壁を作成
-            let upper = SKSpriteNode(texture: itemTexture)
-            upper.position = CGPoint(x: 0.0, y: under_wall_y + itemTexture.size().height + slit_length)
-            
-            // スプライトに物理演算を設定する
-            upper.physicsBody = SKPhysicsBody(rectangleOf: itemTexture.size())
-            upper.physicsBody?.categoryBitMask = self.wallCategory
-            
-            // 衝突の時に動かないように設定する
-            upper.physicsBody?.isDynamic = false
-            
-            wall.addChild(upper)
-            */
-            // スコアアップ用のノード
-        /*    let scoreNode = SKNode()
-            scoreNode.position = CGPoint(x: upper.size.width + self.bird.size.width / 2, y: self.frame.height / 2.0)
-            scoreNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: upper.size.width, height: self.frame.size.height))
-            scoreNode.physicsBody?.isDynamic = false
-            scoreNode.physicsBody?.categoryBitMask = self.scoreCategory
-            scoreNode.physicsBody?.contactTestBitMask = self.birdCategory
+        
+            // アイテムスコアアップ用のノード
+            let itemscoreNode = SKNode()
+            itemscoreNode.position = CGPoint(x: itemTexture.size().width + self.bird.size.width / 2, y: under_wall_y)
+            itemscoreNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: itemTexture.size().width, height: self.frame.size.height))
+            itemscoreNode.physicsBody?.isDynamic = false
+            itemscoreNode.physicsBody?.categoryBitMask = self.itemScoreCategory
+            itemscoreNode.physicsBody?.contactTestBitMask = self.birdCategory
  
-            wall.addChild(scoreNode)
-            */
+            item.addChild(itemscoreNode)
+            
             
             item.run(itemAnimation)
             
             self.wallNode.addChild(item)
         })
         
-        // 次の壁作成までの待ち時間のアクションを作成
+        // 次のアイテム作成までの待ち時間のアクションを作成
         let waitAnimation = SKAction.wait(forDuration: 3)
         
-        // 壁を作成->待ち時間->壁を作成を無限に繰り替えるアクションを作成
+        // アイテムを作成->待ち時間->アイテムを作成を無限に繰り替えるアクションを作成
         let repeatForeverAnimation = SKAction.repeatForever(SKAction.sequence([createItemAnimation, waitAnimation]))
         
         wallNode.run(repeatForeverAnimation)
@@ -414,6 +403,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let bestScore = userDefaults.integer(forKey: "BEST")
         bestScoreLabelNode.text = "Best Score:\(bestScore)"
         self.addChild(bestScoreLabelNode)
+        
+        
+        itemScore = 0
+        itemScoreLabelNode = SKLabelNode()
+        itemScoreLabelNode.fontColor = UIColor.black
+        itemScoreLabelNode.position = CGPoint(x: 10, y: self.frame.size.height - 90)
+        itemScoreLabelNode.zPosition = 100 // 一番手前に表示する
+        itemScoreLabelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
+        itemScoreLabelNode.text = "ItemScore:\(itemScore)"
+        self.addChild(itemScoreLabelNode)
     }
     
     
@@ -452,7 +451,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 userDefaults.set(bestScore, forKey: "BEST")
                 userDefaults.synchronize()
             }
-        } else {
+        }else if(contact.bodyA.categoryBitMask & itemScoreCategory) == itemScoreCategory || (contact.bodyB.categoryBitMask & scoreCategory) == scoreCategory {
+                // スコア用の物体と衝突した
+                print("itemScoreUp")
+                playItemGetSound()
+                itemScore += 1
+                itemScoreLabelNode.text = "ItemScore:\(itemScore)"
+
+        }else {
             // 壁か地面と衝突した
             print("GameOver")
             
@@ -471,7 +477,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func restart() {
         score = 0
+        itemScore = 0
         scoreLabelNode.text = String("Score:\(score)")
+        itemScoreLabelNode.text = String("ItemScore:\(itemScore)")
         
         bird.position = CGPoint(x: self.frame.size.width * 0.2, y:self.frame.size.height * 0.7)
         bird.physicsBody?.velocity = CGVector.zero
@@ -482,5 +490,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         bird.speed = 1
         scrollNode.speed = 1
+    }
+    
+    func playItemGetSound() {
+        var soundID: SystemSoundID = 0
+        let soundURL: URL = Bundle.main.url(forResource: "item_get", withExtension:"mp3")!
+        AudioServicesCreateSystemSoundID(soundURL as CFURL, &soundID)
+        AudioServicesPlaySystemSound(soundID)
     }
 }
