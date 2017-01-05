@@ -51,6 +51,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         wallNode = SKNode()
         scrollNode.addChild(wallNode)
         
+        itemNode = SKNode()
+        scrollNode.addChild(itemNode)
+        
         // 各種スプライトを生成する処理をメソッドに分割
         setupGround()
         setupCloud()
@@ -326,18 +329,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
             // アイテムスコアアップ用のノード
             let itemscoreNode = SKNode()
-            itemscoreNode.position = CGPoint(x: itemTexture.size().width + self.bird.size.width / 2, y: under_wall_y)
-            itemscoreNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: itemTexture.size().width, height: self.frame.size.height))
+            itemscoreNode.position = CGPoint(x: 20.0/*itemTexture.size().width + self.bird.size.width / 2*/, y: under_wall_y)
+       /*     itemscoreNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: itemTexture.size().width, height: self.frame.size.height))*/
             itemscoreNode.physicsBody?.isDynamic = false
             itemscoreNode.physicsBody?.categoryBitMask = self.itemScoreCategory
             itemscoreNode.physicsBody?.contactTestBitMask = self.birdCategory
  
             item.addChild(itemscoreNode)
-            
-            
+
             item.run(itemAnimation)
             
-            self.wallNode.addChild(item)
+            self.itemNode.addChild(item)
+            
+        /*    if(self.bird.physicsBody?.contactTestBitMask == self.itemScoreCategory){
+                item.run(removeItem)
+            }
+           */
+            if((self.bird.physicsBody?.contactTestBitMask)! & self.itemScoreCategory) != self.itemScoreCategory{
+                item.run(removeItem)
+            }
+            
         })
         
         // 次のアイテム作成までの待ち時間のアクションを作成
@@ -346,7 +357,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // アイテムを作成->待ち時間->アイテムを作成を無限に繰り替えるアクションを作成
         let repeatForeverAnimation = SKAction.repeatForever(SKAction.sequence([createItemAnimation, waitAnimation]))
         
-        wallNode.run(repeatForeverAnimation)
+        itemNode.run(repeatForeverAnimation)
     }
 
     
@@ -375,7 +386,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // 衝突のカテゴリー設定
         bird.physicsBody?.categoryBitMask = birdCategory
         bird.physicsBody?.collisionBitMask = groundCategory | wallCategory
-        bird.physicsBody?.contactTestBitMask = groundCategory | wallCategory
+        bird.physicsBody?.contactTestBitMask = groundCategory | wallCategory | itemScoreCategory
         
         // アニメーションを設定
         bird.run(flap)
@@ -451,12 +462,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 userDefaults.set(bestScore, forKey: "BEST")
                 userDefaults.synchronize()
             }
-        }else if(contact.bodyA.categoryBitMask & itemScoreCategory) == itemScoreCategory || (contact.bodyB.categoryBitMask & scoreCategory) == scoreCategory {
+        }else if(contact.bodyA.categoryBitMask & itemScoreCategory) == itemScoreCategory || (contact.bodyB.categoryBitMask & itemScoreCategory) == itemScoreCategory {
                 // スコア用の物体と衝突した
                 print("itemScoreUp")
                 playItemGetSound()
                 itemScore += 1
                 itemScoreLabelNode.text = "ItemScore:\(itemScore)"
+                contact.bodyA.node!.removeFromParent()
 
         }else {
             // 壁か地面と衝突した

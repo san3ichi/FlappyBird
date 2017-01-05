@@ -14,6 +14,7 @@
 		5D6CF9F21E0564350000A092 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D6CF9F01E0564350000A092 /* LaunchScreen.storyboard */; };
 		5D6CF9FB1E05649E0000A092 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D6CF9FA1E05649E0000A092 /* SpriteKit.framework */; };
 		5D6CF9FD1E0569FC0000A092 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D6CF9FC1E0569FC0000A092 /* GameScene.swift */; };
+		5D920CDC1E1E7044008AFA49 /* item_get.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5D920CDB1E1E7044008AFA49 /* item_get.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		5D6CF9F31E0564350000A092 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5D6CF9FA1E05649E0000A092 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		5D6CF9FC1E0569FC0000A092 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		5D920CDB1E1E7044008AFA49 /* item_get.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = item_get.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				5D6CF9E91E0564340000A092 /* ViewController.swift */,
 				5D6CF9EB1E0564350000A092 /* Main.storyboard */,
 				5D6CF9EE1E0564350000A092 /* Assets.xcassets */,
+				5D920CDB1E1E7044008AFA49 /* item_get.mp3 */,
 				5D6CF9FC1E0569FC0000A092 /* GameScene.swift */,
 				5D6CF9F01E0564350000A092 /* LaunchScreen.storyboard */,
 				5D6CF9F31E0564350000A092 /* Info.plist */,
@@ -106,7 +109,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = kenren;
 				TargetAttributes = {
 					5D6CF9E31E0564340000A092 = {
@@ -139,6 +142,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D920CDC1E1E7044008AFA49 /* item_get.mp3 in Resources */,
 				5D6CF9F21E0564350000A092 /* LaunchScreen.storyboard in Resources */,
 				5D6CF9EF1E0564350000A092 /* Assets.xcassets in Resources */,
 				5D6CF9ED1E0564350000A092 /* Main.storyboard in Resources */,
@@ -198,6 +202,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -220,7 +225,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -247,6 +252,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -263,7 +269,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -275,9 +281,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = JPU48P9BR3;
 				INFOPLIST_FILE = FlappyBird/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.techacademy.kenren.FlappyBird;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -289,9 +296,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = JPU48P9BR3;
 				INFOPLIST_FILE = FlappyBird/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.techacademy.kenren.FlappyBird;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -318,6 +326,7 @@
 				5D6CF9F81E0564350000A092 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
